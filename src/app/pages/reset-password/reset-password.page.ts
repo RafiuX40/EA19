@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonCardTitle]
 })
-export class ForgotPasswordPage implements OnInit {
+export class ResetPasswordPage implements OnInit {
   constructor(private alertController: AlertController, private router: Router) { }
 
 
