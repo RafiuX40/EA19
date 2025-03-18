@@ -5,8 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCardTitle } 
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { AuthService } from '../auth.service';
-
+import { AuthService } from 'src/app/auth.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
@@ -14,7 +13,7 @@ import { AuthService } from '../auth.service';
   standalone: true,
   imports: [RouterModule, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonCardTitle]
 })
-export class SignUpPage implements OnInit {
+export class RegisterPage implements OnInit {
 
   email: string = '';
   password: string = '';
@@ -39,7 +38,7 @@ export class SignUpPage implements OnInit {
         return;
       }
 
-      await this.authService.register(this.email, this.password);
+      await this.authService.registerUser(this.email, this.password);
       const alert = await this.alertController.create({
         header: 'Signup Success',
         message: 'Your account has been created successfully!',
