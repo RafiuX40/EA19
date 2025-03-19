@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {  // Cambiado de FirebaseService a AuthService
+export class AuthService {
   private app = initializeApp(environment);
   private auth = getAuth(this.app);
   private db: Firestore = getFirestore(this.app);
@@ -57,3 +57,7 @@ export class AuthService {  // Cambiado de FirebaseService a AuthService
     await deleteDoc(doc(this.db, 'recetas', id));
   }
 }
+
+// Nota: Si ves advertencias de que ciertos componentes de Ionic no se usan en las plantillas,
+// revisa los archivos .html de esas páginas y elimina los imports innecesarios en los módulos
+// o añade los componentes que realmente vas a usar para evitar estos warnings.

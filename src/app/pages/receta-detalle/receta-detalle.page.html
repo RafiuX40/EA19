@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ recetaId === 'new' ? 'Agregar Receta' : 'Editar Receta' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-input placeholder="Nombre" [(ngModel)]="receta.nombre"></ion-input>
+  <ion-textarea placeholder="Descripción" [(ngModel)]="receta.descripcion"></ion-textarea>
+  <ion-button expand="full" (click)="guardarReceta()">Guardar</ion-button>
+</ion-content>

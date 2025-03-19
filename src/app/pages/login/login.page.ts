@@ -1,55 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonItem, IonLabel, IonCardTitle } from '@ionic/angular/standalone';
-import { AlertController} from '@ionic/angular';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
-
+import { RouterModule, Router } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/auth.service'; // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [RouterModule, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonItem, IonLabel, IonCardTitle]
+  imports: [IonicModule, CommonModule, RouterModule, FormsModule],
 })
-export class LoginPage implements OnInit {
-  constructor(private alertController: AlertController, private router: Router){ }
-  ngOnInit(){}
-  async onSubmit(){
-    const email = (document.getElementById('email') as HTMLInputElement).value;
-    const password = (document.getElementById('password') as HTMLInputElement).value;
+export class LoginPage {
+  constructor(private authService: AuthService, private router: Router) {}
 
-
-    if(this.validateEmail(email) && password){
-      const alert = await this.alertController.create({
-        header: 'Login Success',
-        message: 'You have logged in successfully!',
-        buttons: ['Ok'],
-      });
-      await alert.present();
-    } else {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Please check your credentials.',
-        buttons: ['Ok'],
-      });
-      await alert.present();
+  // Función para manejar login
+  async onSubmit(form: NgForm) {
+    if (form.invalid) return;
+    const { email, password } = form.value;
+    try {
+      await this.authService.loginUser(email, password);
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.error('Login failed', error);
+      // Aquí podrías agregar un toast o alerta para avisar al usuario
     }
   }
-  validateEmail(email: string): boolean {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailPattern.test(email);
+
+  // Navegar a Register
+  goToRegister() {
+    this.router.navigate(['/register']);
   }
 
-
-  onSignUp(){
-    this.router.navigateByUrl("sign-up")
-  }
-
-
-  onReset() {
-    this.router.navigateByUrl("forgot-password")
+  // Navegar a Reset Password
+  goToResetPassword() {
+    this.router.navigate(['/reset-password']);
   }
 }

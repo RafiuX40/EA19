@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nueva Receta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="guardarReceta()">
+    <ion-item>
+      <ion-label position="stacked">Título</ion-label>
+      <ion-input [(ngModel)]="receta.titulo" name="titulo" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-textarea [(ngModel)]="receta.descripcion" name="descripcion"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Ingredientes</ion-label>
+      <ion-textarea [(ngModel)]="receta.ingredientes" name="ingredientes"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Pasos</ion-label>
+      <ion-textarea [(ngModel)]="receta.pasos" name="pasos"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" class="ion-margin-top">Guardar Receta</ion-button>
+    <ion-button expand="full" color="medium" (click)="router.navigate(['/home'])">Cancelar</ion-button>
+  </form>
+
+  <ion-button expand="full" color="medium" (click)="goHome()">Cancelar</ion-button>
+
+</ion-content>
